@@ -12,13 +12,18 @@ class Program
         Console.Write("What is your Last Name ");
         string lastName = Console.ReadLine();
         
-        if (lastName.Length == 0 || firstName.Length == 0)
+
+        if (string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName))
         {
-            Console.WriteLine("Empty. Please enter Name");
-        } else {
+            Console.WriteLine("Empty. Please enter your name");
+        }
+        else
+        {
+    
             Console.WriteLine($"Your name is {lastName}, {firstName} {lastName}");
 
         }
+         
 
 
     }
