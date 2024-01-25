@@ -13,6 +13,7 @@ public class PromptGen
     // Entry entry = new Entry();
 
     
+// THIS IS A STRETCH BEYOND REQUIREMENT. it allows the users to personalize prompts
     // Helps users create their personal prompts
     public void AddPersonalPrompt(string para){
         _prompts.Add(para);
