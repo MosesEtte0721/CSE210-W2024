@@ -26,7 +26,7 @@ class Program
         job2.Display();
 
         Resume resume1 = new Resume(); // create new instance of Resume
-        resume1._personName = "Moses Ette";
+        resume1._personName = "Moses, Ette";
         resume1._jobs.Add(job1);
         resume1._jobs.Add(job2);
 
