@@ -90,7 +90,7 @@ public class Journal
 
             foreach (string e in allLines) // looping through each of the file
             {
-                string[] sep = e.Split(",");// reading each word in a line that is separated by comma
+                string[] sep = e.Split(","); // reading each word in a line that is separated by comma
 
                 Entry entry = new Entry(); // instance of the entry object
                 
