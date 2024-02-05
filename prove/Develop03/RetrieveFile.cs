@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-
+/*
+    **** This class creates method to read and retrieve random scriptures information from a file******
+    THIS IS PART OF THE STRETCH TASK OF THE ASSIGNMENT
+*/
 public class RetrieveFile 
 {
     private Dictionary<string, string> _randomScriptures = new Dictionary<string, string>();

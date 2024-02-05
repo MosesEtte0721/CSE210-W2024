@@ -12,6 +12,10 @@ class Program
         int.TryParse(Console.ReadLine(), out input);
         Console.WriteLine();
 
+/*
+    **THE STRECTCHED TASK OF THE ASSIGNMENT WILL BE EXECUTED IF 1 IS PRESSED BY THE USER**
+    Random scriptures will be selected to be hidden
+*/
         if(input == 1)
         {
 
