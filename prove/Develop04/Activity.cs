@@ -19,7 +19,7 @@ public class Activity
     {
         Console.WriteLine($"Welcome to the {this._name} ");
         Console.WriteLine($"    {_description}");
-        // Console.WriteLine(this.GetDuration());
+        
 
     }
 
@@ -42,7 +42,6 @@ public class Activity
         
         DateTime dateTime = DateTime.Now;
         DateTime futureDateAndTime =  dateTime.AddSeconds(10);
-        Console.WriteLine("Welcome Onboard");
         Console.WriteLine();
 
         if(dateTime < futureDateAndTime)
@@ -51,20 +50,21 @@ public class Activity
         {
             // Console.Clear();
             Console.Write($"{spin[i]}");
-            Thread.Sleep(600);
+            Thread.Sleep(seconds);
             Console.Write("\b \b");
         }
         }
+       
         
-        Console.WriteLine("Weldone!");
     }
 
     public void ShowCountDown()
     {
-       int num;
-       for(num = 5; num > 0; num--)
+
+        
+       for(var  i = 5; i >= 0; i--)
        {
-        Console.Write(num);
+        Console.Write(i);
         Thread.Sleep(1000);
         Console.Write("\b \b");
        }

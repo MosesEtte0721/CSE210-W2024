@@ -36,10 +36,11 @@ public class ListingActivity: Activity
         // select random question based on the random Index
         string getRandomPrompt = this._prompts[randomIndex];
         Console.WriteLine();
-         Console.WriteLine(getRandomPrompt.ToUpper());
-         Console.WriteLine();
+        Console.WriteLine(getRandomPrompt.ToUpper());
+        Console.WriteLine();
     }
 
+    
     public List<string> GetListFromUser()
     {
         List<string> userList = new List<string>();
