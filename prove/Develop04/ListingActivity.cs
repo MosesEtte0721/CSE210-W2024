@@ -14,16 +14,13 @@ public class ListingActivity: Activity
 
     private void AddToPrompts()
     {
-        this._prompts.Add("Who are people that you appreciate? ");
-        this._prompts.Add("What are personal strengths of yours? ");
-        this._prompts.Add("Who are people that you have helped this week? ");
-        this._prompts.Add("When have you felt the Holy Ghost this month?");
-        this._prompts.Add("Who are some of your personal heroes? ");
+        this._prompts.Add("\nWho are people that you appreciate? ");
+        this._prompts.Add("\nWhat are personal strengths of yours? ");
+        this._prompts.Add("\nWho are people that you have helped this week? ");
+        this._prompts.Add("\nWhen have you felt the Holy Ghost this month?");
+        this._prompts.Add("\nWho are some of your personal heroes? ");
     }
-    public void Run()
-    {
-
-    }
+   
 
     public void GetRandomPrompt()
     {
@@ -44,32 +41,40 @@ public class ListingActivity: Activity
     public List<string> GetListFromUser()
     {
         List<string> userList = new List<string>();
-        DateTime currentTime = DateTime.Now;
-        DateTime futureTime = currentTime.AddSeconds(this._duration);
+       
         this._count = 0;
-        Console.WriteLine("Respond to the Question: ");
-        while(true)
+ 
+        Console.Write(">> ");
+        string userInput = Console.ReadLine();
+                
+        userList.Add(userInput);
+        this._count++;
+
+        return userList;
+    }
+
+     public void Run()
+    {
+        this.DisplayStartingMessage();
+        int duration = this.GetDuration();
+        DateTime dateTime = DateTime.Now;
+        DateTime endTime = dateTime.AddSeconds(duration);
+        Console.Write("Get ready... ");
+        this.ShowCountDown();
+        Console.WriteLine("List as many responses as you can to the following prompt ");
+        this.GetRandomPrompt();
+        while(DateTime.Now < endTime)
+        {
+            this.GetListFromUser();
+        }
+        if(DateTime.Now >= endTime)
         {
             
-            if(DateTime.Now < futureTime)
-            {
-                Console.Write(">> ");
-                string userInput = Console.ReadLine();
-                
-                userList.Add(userInput);
-                this._count++;
-            }
-            
-            else if(DateTime.Now >= futureTime)
-            {
-                Console.WriteLine("\nYour session has expired: ");
-                Console.WriteLine($"You have entered {this._count} items");
-                break;
-            }
-            
-
-
+            Console.WriteLine("\nWell done! ");
+            Console.WriteLine("Your session has expired");
         }
-        return userList;
+        this.ShowSpinner();
+        this.DisplayEndingMessage();
+        this.ShowSpinner();
     }
 }

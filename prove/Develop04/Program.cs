@@ -11,9 +11,22 @@ class Program
         Description descriptions = new Description();
         Activity activity = new Activity("Not Activity", "This is just a demo", 10);
         ListingActivity listing = new ListingActivity("Listing Activity", descriptions.ListingDescription(), 30);
-        ReflectingAssignment reflect = new ReflectingAssignment("Reflecting Activity",descriptions.ReflectingDescription(), 20);
-
-
+        ReflectingAssignment reflect = new ReflectingAssignment("Reflecting Activity",descriptions.ReflectingDescription(), 6);
+        BreathingActivity breath = new BreathingActivity("Breathin Activity", descriptions.BreathingDescription(), 6);
+        // listing.Run();
+        // breath.Run();
+        reflect.Run();
+        // breath.DisplayStartingMessage();
+        // Console.WriteLine("How long do you to be engaged in the activity? ");
+        // Console.Write(">> ");
+        // breath.ShowCountDown();
+        // breath.ShowSpinner();
+        // Console.Write("Breath in...");
+        // breath.ShowCountDown();
+        // breath.ShowSpinner();
+        // Console.Write("Breath out...");
+        // breath.ShowCountDown();
+        // breath.ShowSpinner();
         // listing.DisplayStartingMessage();
         // Console.WriteLine();
         // // activity.DisplayStartingMessage();
@@ -23,28 +36,14 @@ class Program
         // listing.GetListFromUser();
         // listing.DisplayEndingMessage();
 
-        reflect.DisplayStartingMessage();
-        Console.Write("In seconds, How long do you want your session to last?: ");
-        int spinTime;
-        int.TryParse(Console.ReadLine(), out spinTime);
-        Console.Write($"Get ready... \n");
-        reflect.ShowSpinner(spinTime);
-        Console.WriteLine("Consider the following Prompt: ");
-        Console.WriteLine($"  ---- {reflect.GetRandomPrompt()} ----");
+        // reflect.DisplayStartingMessage();
+        // Console.Write("In seconds, How long do you want your session to last?: ");
+        // int spinTime;
+        // int.TryParse(Console.ReadLine(), out spinTime);
+        // 
 
-        Console.WriteLine("    When you have something in mind, press ENTER key to continue: ");
-        Console.Write(">>  ");
-        string enterKey = Console.ReadLine();
-        Console.WriteLine();
-        if(enterKey == "")
-        {
-           
-            Console.WriteLine("Now ponder on the following question as they are related to this experience.");
-            Console.Write("Your may begin in ... ");
-            reflect.ShowCountDown();
-             reflect.DisplayQuestion();
-            
-            reflect.ShowSpinner(spinTime);
+        
+        //
         }
         
         
@@ -54,5 +53,5 @@ class Program
         
 
         
-    }
+    // }
 }

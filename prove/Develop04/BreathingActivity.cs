@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 public class BreathingActivity: Activity
 {
-    public BreathingActivity(string name, string description, int duration): base(name, description, duration)
+    public BreathingActivity(string name, string description, int duration=0): base(name, description, duration)
     {
         this._name = name;
         this._description = description;
@@ -11,8 +11,35 @@ public class BreathingActivity: Activity
         
     }
 
+    private void Breath(string breath)
+    {
+        Console.WriteLine(breath);
+        
+    }
     public void Run()
     {
+        
+        int duration = this.GetDuration();
+        DateTime dateTime = DateTime.Now;
+        DateTime endTime = dateTime.AddSeconds(duration);
+
+        while(DateTime.Now < endTime)
+        {
+            Console.Write("Breath in...");
+            this.ShowCountDown();
+            this.ShowSpinner();
+            Console.Write("Now Breath out...");
+            this.ShowCountDown();
+            this.ShowSpinner();
+            
+        }
+        if(DateTime.Now >= endTime)
+        {
+            Console.WriteLine("\nWell done! ");
+            Console.WriteLine("Your session has expired");
+        }
+        this.ShowSpinner();
+        this.DisplayEndingMessage();
         
     }
 }

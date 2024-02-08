@@ -8,7 +8,7 @@ public class Activity
     protected string _description;
     protected int _duration;
 
-    public Activity(string name, string description, int duration)
+    public Activity(string name, string description, int duration = 0)
     {
         this._name = name;
         this._description = description;
@@ -23,7 +23,7 @@ public class Activity
 
     }
 
-    private int GetDuration()
+    public int GetDuration()
     {
         Console.WriteLine("How many seconds do you want to spend on this activity? ");
         int duration;
@@ -36,12 +36,12 @@ public class Activity
         Console.WriteLine($"\nThank you for participation in the {this._name}");
     }
 
-    public void ShowSpinner(int seconds)
+    public void ShowSpinner()
     {
          List<string> spin = new List<string>{"|","/","-","\\","|","/","-","\\","|" };
         
         DateTime dateTime = DateTime.Now;
-        DateTime futureDateAndTime =  dateTime.AddSeconds(10);
+        DateTime futureDateAndTime =  dateTime.AddSeconds(this._duration);
         Console.WriteLine();
 
         if(dateTime < futureDateAndTime)
@@ -50,7 +50,7 @@ public class Activity
         {
             // Console.Clear();
             Console.Write($"{spin[i]}");
-            Thread.Sleep(seconds);
+            Thread.Sleep(500);
             Console.Write("\b \b");
         }
         }

@@ -37,11 +37,9 @@ public class ReflectingAssignment: Activity
         this._questions.Add("How can you keep this experience in mind in the future? ");
     }
     
-    public void Run()
-    {
+  
 
-    }
-
+// Select and return a random prompt
     public string GetRandomPrompt()
     {
         this.AddToPrompts();
@@ -56,6 +54,7 @@ public class ReflectingAssignment: Activity
         return $"{GetRandomPrompt.ToUpper() }";
     }
 
+// Select and return a random question
     public string getRandomQuestion()
     {
         this.AddToQuestions();
@@ -70,6 +69,7 @@ public class ReflectingAssignment: Activity
         return $"\n{randomQuestion.ToUpper() }";
     }
 
+// Print or display all the prompts in the list
     public void DisplayPrompt()
     {
         this.GetRandomPrompt();
@@ -79,30 +79,62 @@ public class ReflectingAssignment: Activity
         }
     }
 
+// Print all the question in the list
     public void DisplayQuestion()
     {
         this.getRandomQuestion();
 
-            DateTime dateTime = DateTime.Now;
-            DateTime endTime = dateTime.AddSeconds(900);
-           
-        
-            if(DateTime.Now < endTime)
-            {
+            // DateTime dateTime = DateTime.Now;
+            // DateTime endTime = dateTime.AddSeconds(900);
                 foreach (var question in _questions)
                 {
                     Console.Write($"\n > {question } " );
-                    this.ShowSpinner(800);
-                }
-            }
-            else if(DateTime.Now >= endTime)
-            {
-               
-                this.DisplayEndingMessage();
-            }
-        
-      
+                    
+                }    
+             
     }
 
-   
+     public void Run()
+    {
+        int duration = this.GetDuration();
+        DateTime dateTime = DateTime.Now;
+        DateTime endTime = dateTime.AddSeconds(duration); 
+
+        Console.Write($"Get ready... ");
+        this.ShowSpinner();
+        Console.WriteLine("\nConsider the following Prompt: \n");
+        Console.WriteLine($"  ----{this.GetRandomPrompt()}----"); // Collect and display a random prompt
+        Console.WriteLine("    When you have something in mind, press ENTER key to continue: ");
+         Console.Write(">>  ");
+        string enterKey = Console.ReadLine(); // Collect user input
+        Console.WriteLine();
+        Console.WriteLine("Now ponder on the following question as they are related to this experience.");
+        Console.Write("Your may begin in... ");
+        this.ShowCountDown();
+        
+        // Select a random question when the ENTER key is pressed
+        if(enterKey == "")
+        {  
+                
+                while(DateTime.Now < endTime) // execute the code in the block within the stipulated time
+                {
+                    string randomQuestion = this.getRandomQuestion(); // produce different random question on every loop
+                    
+                    Console.Write($"\n > {randomQuestion } " ); // print the random question
+                    this.ShowSpinner();
+                
+                }
+                
+        }
+        // Display a message when the stipulated time has elapsed
+        if(DateTime.Now >= endTime) 
+        {
+            Console.WriteLine("\nWell done! ");
+            Console.WriteLine("Your session has expired ");
+            
+        }
+        // Display a message at the end of the program
+        this.DisplayEndingMessage();     
+        
+    }
 }
