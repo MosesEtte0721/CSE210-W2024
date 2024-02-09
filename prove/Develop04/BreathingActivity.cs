@@ -18,7 +18,7 @@ public class BreathingActivity: Activity
     }
     public void Run()
     {
-        
+        this.DisplayStartingMessage();
         int duration = this.GetDuration();
         DateTime dateTime = DateTime.Now;
         DateTime endTime = dateTime.AddSeconds(duration);
@@ -31,12 +31,13 @@ public class BreathingActivity: Activity
             Console.Write("Now Breath out...");
             this.ShowCountDown();
             this.ShowSpinner();
+            Console.WriteLine();
             
         }
         if(DateTime.Now >= endTime)
         {
             Console.WriteLine("\nWell done! ");
-            Console.WriteLine("Your session has expired");
+            Console.WriteLine("Your session has expired\n");
         }
         this.ShowSpinner();
         this.DisplayEndingMessage();

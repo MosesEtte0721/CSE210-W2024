@@ -17,7 +17,7 @@ public class Activity
 
     public void DisplayStartingMessage()
     {
-        Console.WriteLine($"Welcome to the {this._name} ");
+        Console.WriteLine($"Welcome to the {this._name}: ");
         Console.WriteLine($"    {_description}");
         
 
@@ -33,7 +33,7 @@ public class Activity
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine($"\nThank you for participation in the {this._name}");
+        Console.WriteLine($"\nThank you for participation in the {this._name} \n");
     }
 
     public void ShowSpinner()

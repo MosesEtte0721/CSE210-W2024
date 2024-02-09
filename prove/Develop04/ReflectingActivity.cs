@@ -66,7 +66,7 @@ public class ReflectingAssignment: Activity
         // select random question based on the random Index
         string randomQuestion = this._questions[randomIndex];
     
-        return $"\n{randomQuestion.ToUpper() }";
+        return $"{randomQuestion.ToUpper() }";
     }
 
 // Print or display all the prompts in the list
@@ -96,6 +96,7 @@ public class ReflectingAssignment: Activity
 
      public void Run()
     {
+        this.DisplayStartingMessage();
         int duration = this.GetDuration();
         DateTime dateTime = DateTime.Now;
         DateTime endTime = dateTime.AddSeconds(duration); 
@@ -120,7 +121,7 @@ public class ReflectingAssignment: Activity
                 {
                     string randomQuestion = this.getRandomQuestion(); // produce different random question on every loop
                     
-                    Console.Write($"\n > {randomQuestion } " ); // print the random question
+                    Console.Write($"> {randomQuestion } " ); // print the random question
                     this.ShowSpinner();
                 
                 }
