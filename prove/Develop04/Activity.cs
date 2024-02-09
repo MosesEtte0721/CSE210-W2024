@@ -33,7 +33,7 @@ public class Activity
 
     public void DisplayEndingMessage()
     {
-        Console.WriteLine($"\nThank you for participation in the {this._name} \n");
+        Console.WriteLine($"\nThank you for participating in the {this._name} \n\n");
     }
 
     public void ShowSpinner()
@@ -55,7 +55,6 @@ public class Activity
         }
         }
        
-        
     }
 
     public void ShowCountDown()

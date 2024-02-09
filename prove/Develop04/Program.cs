@@ -46,7 +46,7 @@ class Program
             {
                 break;
             }
-            // Console.Clear();
+            
             menu.RunMenu();
             Console.WriteLine("What Activity Do you wish to participate? ");
             Console.WriteLine("Type (1-3) and 4 to quit. ");

@@ -43,28 +43,46 @@ public class ReflectingAssignment: Activity
     public string GetRandomPrompt()
     {
         this.AddToPrompts();
+        List<string> previousRandom = new List<string>();
         Random random = new Random();
         // count the total question in the list
         int totalPrompt = this._prompts.Count();
         // get a random index of the questions
         int randomIndex = random.Next(totalPrompt); 
         // select random question based on the random Index
-        string GetRandomPrompt = this._prompts[randomIndex];
+        string getRandomPrompt = this._prompts[randomIndex];
+        while(previousRandom.Contains(getRandomPrompt))
+        {
+            randomIndex = random.Next(totalPrompt);
+            getRandomPrompt = this._prompts[randomIndex];
+        }
+        previousRandom.Add(getRandomPrompt);
     
-        return $"{GetRandomPrompt.ToUpper() }";
+        return $"{getRandomPrompt.ToUpper() }";
     }
 
 // Select and return a random question
     public string getRandomQuestion()
     {
+        List<string> previousQuestions = new List<string>();
         this.AddToQuestions();
         Random random = new Random();
         // count the total question in the list
-        int totalQuestion = this._questions.Count();
+        int totalQuestions = this._questions.Count();
         // get a random index of the questions
-        int randomIndex = random.Next(totalQuestion); 
+        int randomIndex = random.Next(1, totalQuestions); 
         // select random question based on the random Index
         string randomQuestion = this._questions[randomIndex];
+
+        // checks if the random question is already in a list,
+        while(previousQuestions.Contains(randomQuestion))
+        {
+            // generate new random question if the current question was already selected
+            randomIndex = random.Next(1, totalQuestions);
+            // get the index of the newly generated item in the list
+            randomQuestion = this._questions[randomIndex];
+        }
+        previousQuestions.Add(randomQuestion);
     
         return $"{randomQuestion.ToUpper() }";
     }
@@ -121,7 +139,7 @@ public class ReflectingAssignment: Activity
                 {
                     string randomQuestion = this.getRandomQuestion(); // produce different random question on every loop
                     
-                    Console.Write($"> {randomQuestion } " ); // print the random question
+                    Console.Write($"\n> {randomQuestion } " ); // print the random question
                     this.ShowSpinner();
                 
                 }
