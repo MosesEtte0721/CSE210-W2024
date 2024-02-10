@@ -29,7 +29,7 @@ class Program
         foreach (Shape item in shapeList)
         {
             Console.WriteLine($"The {item.GetColor()} shape has an area of {item.GetArea()}");
-            // Console.WriteLine();
+        
         }
         {
             
