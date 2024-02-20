@@ -10,6 +10,7 @@ public class MathAssignment: Assignment
 
     public void getHomeWorkList()
     {
+        base.getStudentName();
         // Console.WriteLine($"{this.getStudentName()}- topic: {this.getTopic()}");
         Console.WriteLine($"Section: {this._section}, Problem: {this._problems}");
     }
