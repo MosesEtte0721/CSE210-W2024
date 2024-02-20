@@ -82,9 +82,9 @@ public class ClientFeedback: CheckIn
     {
         this._feedback.Add(param1, param2);
     }
-    public void ExecuteClass()
+    public override void ExecuteClass()
     {
-        Console.WriteLine("client's feedBac".ToUpper());
+        Console.WriteLine("client's feedBack".ToUpper());
         Console.WriteLine($"Your Feedback Will Help us Serve you Better. \n");
         
         // The customer shares his/her experience in details with customer rep
@@ -104,6 +104,7 @@ public class ClientFeedback: CheckIn
         
         // suggestions on how to improve the quality of service
         Console.WriteLine("\nWhat do you think we (customer care and the company) can do to improve the quality of our services? ");
+        Console.Write(">> ");
         this.AddToDictionary("Comment and Suggestions: ", this.CommentAndSuggestion());
 
         // Ask if the customer will recommend or refer our company his/her friends and family
@@ -129,6 +130,15 @@ public class ClientFeedback: CheckIn
         Console.WriteLine($"\nYour Feedback Has Been Recorded. ");
         Console.WriteLine($"Thank you for Your Patronage. ");
         // Console.WriteLine($"");
+    }
+
+    public void DisplayClientFeedback()
+    {
+        foreach(KeyValuePair<string, string> item in this._feedback)
+        {
+            Console.WriteLine($"{item.Key} \n  {item.Value}");
+            Console.WriteLine("\n");
+        }
     }
 
 
