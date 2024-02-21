@@ -1,5 +1,6 @@
 using System;
 using System.Formats.Tar;
+using System.Text;
 
 public class ClientSocialMedia: CheckIn
 {
@@ -55,9 +56,19 @@ public class ClientSocialMedia: CheckIn
         return $"{this._facebook} \n{this._twitter} \n{this._instagram} \n{this._linkedIn}";
     }
 
-    public void AddToDictionary(string param1, string param2)
+    public override bool AddToDictionary(string param1, string param2)
     {
-        this._socialMedia.Add(param1, param2);
+            if (!_socialMedia.ContainsKey(param1))
+            {
+                this._socialMedia.Add(param1, param2);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("The key already exists in the dictionary.");
+                return false;
+            }
+
     }
     public long RecieptId()
     {
@@ -77,21 +88,22 @@ public class ClientSocialMedia: CheckIn
 
     public override void ExecuteClass()
     {
-        // base.ExecuteClass();
-        Console.WriteLine("Do you have an Active social media Account? ");
+        Console.WriteLine("Client Social Media Handle \n".ToUpper());
+        Console.WriteLine("Do you have an Active social media Account? would you like to share it with us? ");
         Console.Write(">> ");
         string yesOrNo = Console.ReadLine().ToUpper();
         switch (yesOrNo)
         {
             case "YES":
                 this.DisplayListOfSocialMedia();
-                Console.WriteLine("\nPlease Enter a number from the list that correspond with your social media platform");
+                Console.WriteLine("\nPlease Enter a number (1-4)  from the list that correspond with your social media platform (type 5 to quit)");
+                Console.Write(">> ");
                 int yes;                
                 int.TryParse(Console.ReadLine().ToUpper(), out yes);
-
+                Console.WriteLine("you can only enter up to 4 social media handle");
     // iterate 8 times for social media platforms
                 while(this._socialMedia.Count < 4 ) 
-                {Console.WriteLine("you can only entry up to 8 social media handle".ToUpper());
+                {
                     
                     if(yes == 1)
                     {
@@ -183,9 +195,9 @@ public class ClientSocialMedia: CheckIn
                         break;
                     }
                    
-                    Console.Clear();
+                    Console.WriteLine();
                     this.DisplayListOfSocialMedia();
-                    Console.WriteLine("\nPlease Enter a number from the list that correspond with your social media platform");
+                    Console.WriteLine("Agian, Please Enter a number from the list that correspond with your social media platform (type 5 to quit)");
                     Console.Write(">> ");
                     int.TryParse(Console.ReadLine().ToUpper(), out yes);
                       
@@ -207,14 +219,15 @@ public class ClientSocialMedia: CheckIn
 
     }
 
-      public void DisplaySocialMedia()
-    {
-        Console.WriteLine("Client's Social Media Handle".ToUpper());
+      public override string DisplayCurrentClassInfo()
+    {   
+        StringBuilder stringBuilder = new StringBuilder();
+        Console.WriteLine("Client's Social Media Handle \n".ToUpper());
         foreach(KeyValuePair<string, string> info in this._socialMedia)
         {
-            Console.WriteLine($"{info.Key} {info.Value} \n");
+            stringBuilder.Append($"{info.Key} {info.Value} \n");
         }
-        
+        return stringBuilder.ToString();
     }
 
 

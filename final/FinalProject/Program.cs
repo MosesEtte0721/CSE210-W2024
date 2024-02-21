@@ -4,7 +4,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello FinalProject World!");
+        Console.Clear();
+       
         CheckIn checkIn = new CheckIn("Moses", "Ette", "no location", "senatoette@mymail.com", 0800000000);
         CheckOut checkOut = new CheckOut("This is my remark and it is subject to change");
         CheckOut checkOutEmpty = new CheckOut();
@@ -16,75 +17,82 @@ class Program
         ClientFeedback feedback = new ClientFeedback();
         CheckIn checkInEmpty = new CheckIn();
 
-        Console.WriteLine("______________________________________________________________ \n");
-        checkInEmpty.ExecuteClass();
-        Console.WriteLine("______________________________________________________________ \n\n");
+        MenuList menuList = new MenuList();
 
-        Console.WriteLine("______________________________________________________________ \n");
-        Console.WriteLine("Checkin Information".ToUpper());
-        checkInEmpty.DisplayCurrentClassInfo();
-        Console.WriteLine("______________________________________________________________ \n\n");
-        // companyhelp.HelpDesk();
-        // companyhelp.SetAndGetHqPhone = 09894746374784;
-        // Console.WriteLine();
-        // Console.WriteLine("Headquaters Address and Phone Number: ");
-        // Console.WriteLine("_____________________________________________________________ \n");
+        List<CheckIn> checkinList = new List<CheckIn>();
+        checkinList.Add(checkIn);
+        checkinList.Add(socialMedia);
+        checkinList.Add(reference);
+        checkinList.Add(feedback);
+        checkinList.Add(checkOut);
+
+        Console.WriteLine("Welcome To Customer Experience Improvement Application".ToUpper());
+        Console.WriteLine("We Encourage you to Answer the Prompts to Enable Us Improve our Quality of Service.");
         
-        // // Console.WriteLine("REFERENCE ");
-        // // Console.WriteLine($"{reference.Name()}, {reference.Address()}, {reference.Email()}, {reference.Phone()}");
-        // reference.ExecuteClass();
-        // Console.WriteLine("______________________________________________________________ \n\n");
+        Console.WriteLine();
+        menuList.DisplayMenuList();
+        Console.WriteLine($"\nWhat would you like to do? Select 1-3 (number only)");
+        Console.Write(">> ");
+        int choice;
+        int.TryParse(Console.ReadLine(), out choice);
+        while(true)
+        {
+            if(choice == 1)
+            {
+                foreach (CheckIn item in checkinList)
+                {
+                    Console.WriteLine("______________________________________________________________ \n");
+                    item.ExecuteClass();
+                    Console.WriteLine("______________________________________________________________ \n");
 
-        // Console.WriteLine("REFERENCE ");
-        // // Console.WriteLine($"{reference.Name()}, {reference.Address()}, {reference.Email()}, {reference.Phone()}");
-        // reference.DisplayReferInfo();
-        // Console.WriteLine("______________________________________________________________ \n\n");
+                }
+            } 
+            else if(choice == 2)
+            {
+                foreach (CheckIn item in checkinList)
+                {
+                     Console.WriteLine("______________________________________________________________ \n");
+                    item.DisplayCurrentClassInfo();
+                    Console.WriteLine("______________________________________________________________ \n");
+                    Console.WriteLine("Processing...");
+                    menuList.ShowSpinner(500);
 
+                }
+            }
+            else if(choice == 3)
+            {
+                SaveDictionaryToFile saveDictionary = new SaveDictionaryToFile();
 
-        // Console.WriteLine("______________________________________________________________ \n");
-        // feedback.ExecuteClass();
-        // Console.WriteLine("______________________________________________________________ \n\n");
-
-        // Console.WriteLine("______________________________________________________________ \n");
-        // feedback.DisplayClientFeedback();
-        // Console.WriteLine("______________________________________________________________ \n\n");
-
+                foreach(var check in checkinList)
+                {
+                    saveDictionary.SaveDictionary(check.SomeFunction());
+                }
+                
+                
+            }
+                
+            else if(choice == 4)
+            {
+                break;
+            }
+            else if(choice == 5)
+            {
+                Console.WriteLine("Thank you and Goodbye".ToUpper());
+                break;
+            }
+            
+            Console.WriteLine("Welcome To Customer Experience Improvement Application".ToUpper());
+            Console.WriteLine("We Encourage you to Answer the Prompts to Enable Us Improve our Quality of Service.");
+           
+           
+            Console.WriteLine();
+            menuList.DisplayMenuList();
+            Console.WriteLine($"\nWhat would you like to do? Select 1-3 (number only)");
+            Console.Write(">> ");
+            int.TryParse(Console.ReadLine(), out choice);
+        }
         
-        //  Console.WriteLine("______________________________________________________________ \n");
-        // socialMediaEmpty.ExecuteClass();
-        // Console.WriteLine("______________________________________________________________ \n\n");
-
-        // Console.WriteLine("______________________________________________________________ \n");
-        // socialMediaEmpty.DisplaySocialMedia();
-        // Console.WriteLine("______________________________________________________________ \n\n");
-
-
-        // Console.WriteLine("_____________________________________________________________ \n");
-        // checkOutEmpty.ExecuteClass();
-        // Console.WriteLine("_____________________________________________________________ \n");
-
-
-        // Console.WriteLine("_____________________________________________________________ \n");
-        // referenceEmpty.ExecuteClass();
-        // Console.WriteLine("_____________________________________________________________ \n");
-
-        // companyHelp.ExecuteClass();
-        // Console.WriteLine("\n");
-
-        // companyHelp.DisplayCompanyInfo();
-
-    //    Console.WriteLine("_____________________________________________________________ \n");
-    //     checkOutEmpty.ExecuteClass();
-    //     Console.WriteLine();
-    //    Console.WriteLine("_____________________________________________________________ \n");
-
-
-    //    Console.WriteLine("_____________________________________________________________ \n");
-    //     checkOutEmpty.DisplayCheckOutInfo();
-    //    Console.WriteLine("_____________________________________________________________ \n");
-       
-        // company.Name();
-
+        
        
     }
 }

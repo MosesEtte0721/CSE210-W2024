@@ -1,5 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Text;
+using System.Collections.Generic;
 
 public class CheckOut: CheckIn
 {
@@ -10,6 +12,7 @@ public class CheckOut: CheckIn
     private string _attendantFirstName;
     private string _attendantLastName;
     private Dictionary<string, string> _checkOutInfo = new Dictionary<string, string>();
+    private List<CheckIn> _checkin = new List<CheckIn>();
 
     
     public CheckOut(string remark) 
@@ -24,9 +27,18 @@ public class CheckOut: CheckIn
 
     }
 
-    private void AddToDictionary(string param1, string param2)
+    public override bool AddToDictionary(string param1, string param2)
     {
-          this._checkOutInfo.Add(param1, param2);
+          if (!_checkOutInfo.ContainsKey(param1))
+          {
+               this._checkOutInfo.Add(param1, param2);
+               return true;
+          }
+          else
+          {
+               Console.WriteLine("The key already exists in the dictionary.");
+               return false;
+          }
     }
 
     public bool PurposeAccomplished()
@@ -76,7 +88,7 @@ public class CheckOut: CheckIn
     public override void ExecuteClass()
     {
 
-          Console.WriteLine("Representative's Information ".ToUpper());
+          Console.WriteLine("Customer care Representative's Information ".ToUpper());
           Console.WriteLine("Answering these questions will allow us serve you better: \n");
      
           Console.WriteLine("Did you Achieve Your Purpose of Visit? ");
@@ -129,14 +141,33 @@ public class CheckOut: CheckIn
 
     }
 
-    public void DisplayCheckOutInfo()
+    public override string DisplayCurrentClassInfo()
     {
-          Console.WriteLine("Check Out summary \n".ToUpper());
+          StringBuilder stringBuilder = new StringBuilder();
+          Console.WriteLine("Client Check Out \n".ToUpper());
           foreach(KeyValuePair<string, string> info in this._checkOutInfo)
           {
-               Console.WriteLine($"{info.Key} {info.Value} \n");
+               stringBuilder.Append($"{info.Key} {info.Value} \n");
           }
-        
+          return stringBuilder.ToString();
+    }
+
+    private List<CheckIn> SomeOne()
+
+    {     
+
+     List<CheckIn> _checkin = new List<CheckIn>();
+     
+     
+          foreach(KeyValuePair<string, string> item in this._checkOutInfo)
+          {
+               CheckIn checkIn = new CheckIn();
+               CheckIn checkin = new CheckIn(string.Empty, string.Empty, string.Empty, string.Empty,0);
+               _checkin.Add(checkIn);
+               _checkin.Add(checkin);
+          }
+
+          return _checkin;
     }
 
 }

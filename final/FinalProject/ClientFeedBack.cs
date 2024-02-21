@@ -1,3 +1,6 @@
+using System;
+using System.Text;
+using System.Collections.Generic;
 public class ClientFeedback: CheckIn
 {
     private bool _possibleReferal;
@@ -78,9 +81,18 @@ public class ClientFeedback: CheckIn
         set {this._possibleReferal = value;}
     }
 
-    public void AddToDictionary(string param1, string param2)
+    public override bool AddToDictionary(string param1, string param2)
     {
-        this._feedback.Add(param1, param2);
+            if (!_feedback.ContainsKey(param1))
+            {
+                this._feedback.Add(param1, param2);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("The key already exists in the dictionary.");
+                return false;
+            }
     }
     public override void ExecuteClass()
     {
@@ -95,6 +107,7 @@ public class ClientFeedback: CheckIn
         this.AddToDictionary("Experience With Attendant: ", this.ExperienceWithAttendant());
 
         // overall experience of the customer in one word
+        Console.WriteLine();
         this.DisplayListExperience();
         Console.WriteLine("Describe your experience in one word by typing the corresponding number to your overall experience (1-5)");
         Console.Write(">> ");
@@ -132,13 +145,15 @@ public class ClientFeedback: CheckIn
         // Console.WriteLine($"");
     }
 
-    public void DisplayClientFeedback()
+    public override string DisplayCurrentClassInfo()
     {
+        StringBuilder stringBuilder = new StringBuilder();
+        Console.WriteLine("Client's Feedback \n".ToUpper());
         foreach(KeyValuePair<string, string> item in this._feedback)
         {
-            Console.WriteLine($"{item.Key} \n  {item.Value}");
-            Console.WriteLine("\n");
+            stringBuilder.Append($"{item.Key} \n  {item.Value} \n");
         }
+        return stringBuilder.ToString();
     }
 
 

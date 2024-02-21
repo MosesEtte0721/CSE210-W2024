@@ -1,5 +1,6 @@
 using System;
 using System.Net.Mail;
+using System.Text;
 
 public class CheckIn
 {
@@ -133,6 +134,7 @@ public class CheckIn
 }
     public virtual void ExecuteClass()
     {
+        Console.WriteLine("Client check in \n".ToUpper());
         this.AddToDictionary("Session ID: ", this._clientId.ToString());
         Console.WriteLine("What is Your First Name?");
         Console.Write(">> ");
@@ -162,9 +164,6 @@ public class CheckIn
         }
         
 
-        
-        
-
         Console.WriteLine("\nWhat is Your Email Address?");
         Console.Write(">> ");
         string emailAddress = Console.ReadLine();
@@ -177,7 +176,7 @@ public class CheckIn
         }
 
         Console.WriteLine("\nHow can we be of help?");
-        Console.WriteLine(">> ");
+        Console.Write(">> ");
         string purpose = Console.ReadLine();
         string aim = this.PurposeOfVisit(purpose);
         this.AddToDictionary("Purpose of visit: ", $"{aim}");
@@ -200,11 +199,41 @@ public class CheckIn
         
     }
 
-    public virtual void DisplayCurrentClassInfo()
+   public virtual string DisplayCurrentClassInfo()
     {
+        
+  
+        StringBuilder stringBuilder = new StringBuilder(); // 
+        Console.WriteLine("Client Check In \n".ToUpper());
         foreach(KeyValuePair<string, string> item in this._checkInDict)
         {
-            Console.WriteLine($"\n{item.Key} {item.Value}");
+            stringBuilder.Append($"\n{item.Key} {item.Value}");
         }
+
+        return stringBuilder.ToString();
+
     }
+    //     foreach(KeyValuePair<string, string> item in this._checkInDict)
+    // {
+    //     CheckIn checkIn = new CheckIn(string.Empty,string.Empty,string.Empty,string.Empty,0); 
+    //     checkIns.Add(checkIn);
+    // }
+
+    // return checkIns;
+
+    // }
+    public List<CheckIn> SomeFunction() 
+    {
+
+       
+        
+     List<CheckIn> checkinList = new List<CheckIn>();
+     // Add a bunch of CheckIn objects to the list.
+     CheckIn checkin = new CheckIn();
+
+     checkinList.Add(checkin);
+ 
+    return checkinList;
+}
+
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 public class Reference: CheckIn
 {
@@ -20,14 +21,23 @@ public class Reference: CheckIn
         this._refPhone = phone;
     }
 
-    public Reference()
+    public Reference():this(string.Empty,string.Empty,string.Empty,0,string.Empty)
     {
 
     }
 
-    public void AddToDictionary(string param1, string param2)
+    public override bool AddToDictionary(string param1, string param2)
     {
-        this._refererInfo.Add(param1, param2);
+            if (!_refererInfo.ContainsKey(param1))
+            {
+                this._refererInfo.Add(param1, param2);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("The key already exists in the dictionary.");
+                return false;
+            }
     }
 
     public override string Name()
@@ -54,7 +64,7 @@ public class Reference: CheckIn
     public override void ExecuteClass()
     {
         Console.WriteLine("Reference ".ToUpper());
-        Console.Write("Providing the following information will help us show gratitude to the one recommended us to you \n");
+        Console.Write("Providing the following information will help us show gratitude to the person who recommended us to you \n");
         // Ask for customer care rep first name and then add it to a collection
           Console.WriteLine("\nEnter First Name of Your referer: ");
           Console.Write(">> ");
@@ -75,7 +85,7 @@ public class Reference: CheckIn
           Console.WriteLine("\nEnter Address of Your referer: ");
           Console.Write(">> ");
           this._refAddress = Console.ReadLine();
-          this.AddToDictionary("Address Of Referer: ", this.Address());
+          this.AddToDictionary("Address Of Referer (optional): ", this.Address());
           Console.WriteLine("\n");
 
           // Ask for customer care rep's Email Address and then add it to a collection
@@ -96,13 +106,15 @@ public class Reference: CheckIn
           Console.WriteLine("We Invite you Recommend Our Products and Services to Your Friends too. ");
     }
 
-      public void DisplayReferInfo()
+      public override string DisplayCurrentClassInfo()
     {
-          Console.WriteLine("Referer Information \n".ToUpper());
-          foreach(KeyValuePair<string, string> info in this._refererInfo)
-          {
-               Console.WriteLine($"{info.Key} {info.Value} \n");
-          }
+        StringBuilder stringBuilder = new StringBuilder();
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach(KeyValuePair<string, string> info in this._refererInfo)
+        {
+            stringBuilder.Append($"{info.Key} {info.Value} \n");
+        }
+        return stringBuilder.ToString();
         
     }
 

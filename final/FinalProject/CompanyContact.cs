@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 public class CompanyContact: CheckIn
 {
@@ -38,9 +39,18 @@ public class CompanyContact: CheckIn
         this._opManagerPhone = opManagerPhone;
     }
 
-    public void AddToDictionary(string param1, string param2)
+    public override bool AddToDictionary(string param1, string param2)
     {
-        this._CompanyInfo.Add(param1, param2);
+            if (!_CompanyInfo.ContainsKey(param1))
+            {
+                this._CompanyInfo.Add(param1, param2);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("The key already exists in the dictionary.");
+                return false;
+            }
     }
     public string HelpDesk()
     {
@@ -87,12 +97,15 @@ public class CompanyContact: CheckIn
 
     }
 
-    public void DisplayCompanyInfo()
+    public override string DisplayCurrentClassInfo()
     {
+        StringBuilder stringBuilder = new StringBuilder();
+        Console.WriteLine("Contact information of the Company \n".ToUpper());
         foreach(KeyValuePair<string, string> info in this._CompanyInfo)
         {
-            Console.WriteLine($"{info.Key} {info.Value} \n");
+            stringBuilder.Append($"{info.Key} {info.Value} \n");
         }
+        return stringBuilder.ToString();
         
     }
 }
