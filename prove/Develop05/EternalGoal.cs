@@ -19,7 +19,7 @@ public class EternalGoal: Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{this._shortName},{this._description},{this._points},{this._numberOfTimesCompleted}";
+        return $"\n[] Name: {this._shortName},Desc: {this._description}, Points: {this._points}, Target: {this._numberOfTimesCompleted}";
     }
 
     public override bool IsComplete()

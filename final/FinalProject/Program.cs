@@ -52,10 +52,13 @@ class Program
                 foreach (CheckIn item in checkinList)
                 {
                      Console.WriteLine("______________________________________________________________ \n");
-                    item.DisplayCurrentClassInfo();
+                    Console.WriteLine(item.DisplayCurrentClassInfo());
                     Console.WriteLine("______________________________________________________________ \n");
-                    Console.WriteLine("Processing...");
+                    // Console.WriteLine("Processing...");
                     menuList.ShowSpinner(500);
+                    Console.WriteLine("______________________________________________________________ \n");
+                    
+
 
                 }
             }
@@ -65,7 +68,7 @@ class Program
 
                 foreach(var check in checkinList)
                 {
-                    saveDictionary.SaveDictionary(check.SomeFunction());
+                    saveDictionary.SaveDictionary(check.DisplayChickIn());
                 }
                 
                 

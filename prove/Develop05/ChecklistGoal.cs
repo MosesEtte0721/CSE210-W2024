@@ -23,7 +23,7 @@ public class ChecklistGoal: Goal
 
     public override string GetStringRepresentation()
     {
-        return $"Name of Goal:{this._shortName}, Desc:{this._description}, Points: {this._points}, Target: {this._target}, Bonus: {this._bonus}, AmountCompleted: {this._amountCompleted}";
+        return $"\nName of Goal:{this._shortName}, Desc:{this._description}, Points: {this._points}, Target: {this._target}, Bonus: {this._bonus}, AmountCompleted: {this._amountCompleted}";
     }
 
     public override bool IsComplete()
@@ -33,6 +33,6 @@ public class ChecklistGoal: Goal
 
     public override string GetDetailString()
     {
-        return $"[] {this._shortName}, {this._description}, {this._points}, {this._target}";
+        return $"\n[ ] {this._shortName}, ({this._description}), {this._points}, ----Currently completed: {0}/{this._target}";
     }
 }

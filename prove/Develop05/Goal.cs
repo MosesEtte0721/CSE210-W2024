@@ -21,10 +21,14 @@ public abstract class Goal
 
     public virtual string GetDetailString()
     {   
-        return $"[] {this._shortName}, {this._description}, {this._points}";
+        return $"\n[ ] {this._shortName}, {this._description}, {this._points}";
 
     }
+    // public virtual void AddGoals(Goal _goals)
+    // {
 
+    // }
+   
    
 
     public abstract string GetStringRepresentation();

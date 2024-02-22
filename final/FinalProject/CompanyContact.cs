@@ -13,9 +13,11 @@ public class CompanyContact: CheckIn
     private string _address;
     private string _state;
     private string _country;
+    // private Dictionary<string, string> _CompanyInfo = new Dictionary<string, string>();
 
     private long _hdQuatersPhone;
     private Dictionary<string, string> _CompanyInfo = new Dictionary<string, string>();
+    private List<string> _checkin = new List<string>();
 
     public CompanyContact(string opFirstName, string opLastName, string opEmail, long opManagerPhone) 
     {
@@ -38,6 +40,11 @@ public class CompanyContact: CheckIn
         this._opEmail = opEmail;
         this._opManagerPhone = opManagerPhone;
     }
+
+     public override void AddCheckIn(string check)
+     {
+          this._checkin.Add(check);
+     }
 
     public override bool AddToDictionary(string param1, string param2)
     {
@@ -90,9 +97,15 @@ public class CompanyContact: CheckIn
     {
         Console.WriteLine("Contact informatin of our Company ".ToUpper());
         Console.WriteLine("For further Enquiries, you can contact our Headquarters, Helpdesk, and Operational Manager ");
+        
         this.AddToDictionary("HelpDesk: \n".ToUpper(), this.HelpDesk());
+        this.AddCheckIn($"HelpDesk: \n{this.HelpDesk()}");
+        
         this.AddToDictionary("Operation Manager: \n".ToUpper(), this.OperationalManager());
+        this.AddCheckIn(this.OperationalManager());
+        
         this.AddToDictionary("HeadQuaters Contact: \n".ToUpper(), this.HqInfo());
+        this.AddCheckIn($"HeadQuaters Contact: \n{ this.HqInfo()}");
 
 
     }
@@ -107,5 +120,20 @@ public class CompanyContact: CheckIn
         }
         return stringBuilder.ToString();
         
+    }
+
+    public override List<string> DisplayChickIn()
+    {
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach (var checkin in this._checkin)
+        {
+            string[] keyValue = checkin.Split(": ");
+            string keys = keyValue[0];
+            string values = keyValue[1];
+            Console.WriteLine($"{keys}: {values}");
+
+            
+        }
+        return this._checkin;
     }
 }

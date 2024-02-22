@@ -12,7 +12,7 @@ public class CheckOut: CheckIn
     private string _attendantFirstName;
     private string _attendantLastName;
     private Dictionary<string, string> _checkOutInfo = new Dictionary<string, string>();
-    private List<CheckIn> _checkin = new List<CheckIn>();
+    private List<string> _checkin = new List<string>();
 
     
     public CheckOut(string remark) 
@@ -40,6 +40,12 @@ public class CheckOut: CheckIn
                return false;
           }
     }
+
+     public override void AddCheckIn(string check)
+     {
+          this._checkin.Add(check);
+     }
+
 
     public bool PurposeAccomplished()
     {
@@ -129,12 +135,14 @@ public class CheckOut: CheckIn
           this._attendantLastName = Console.ReadLine();
           Console.WriteLine("\n");
           this.AddToDictionary("Name of Customer Care Representative: ", $"{this._attendantLastName}, {this._attendantFirstName} {this._attendantMiddleName}");
+          this.AddCheckIn($"Name of Customer Care Representative: {this._attendantLastName}, {this._attendantFirstName} {this._attendantMiddleName}");
 
 // Ask for the customer's remark and then add it to a collection
           Console.WriteLine("Please Enter Your Remark: ");
           Console.Write(">> ");
           this._remark = Console.ReadLine();
           this.AddToDictionary("Remark: ", this.Remark());
+          this.AddCheckIn($"Remark: {this.Remark()}");
 
           Console.WriteLine("\nThe information has been recorded: ");
           Console.WriteLine("We look forward to seeing you agian: \n");
@@ -152,22 +160,19 @@ public class CheckOut: CheckIn
           return stringBuilder.ToString();
     }
 
-    private List<CheckIn> SomeOne()
+    
+     public override List<string> DisplayChickIn()
+    {
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach (var checkin in this._checkin)
+        {
+            string[] keyValue = checkin.Split(": ");
+            string keys = keyValue[0];
+            string values = keyValue[1];
+            Console.WriteLine($"{keys}: {values}");
 
-    {     
-
-     List<CheckIn> _checkin = new List<CheckIn>();
-     
-     
-          foreach(KeyValuePair<string, string> item in this._checkOutInfo)
-          {
-               CheckIn checkIn = new CheckIn();
-               CheckIn checkin = new CheckIn(string.Empty, string.Empty, string.Empty, string.Empty,0);
-               _checkin.Add(checkIn);
-               _checkin.Add(checkin);
-          }
-
-          return _checkin;
+            
+        }
+        return this._checkin;
     }
-
 }

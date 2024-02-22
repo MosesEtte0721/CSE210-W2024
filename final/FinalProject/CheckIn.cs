@@ -12,6 +12,7 @@ public class CheckIn
     private string _firstName;
     private string _lastName;
     private Dictionary<string, string> _checkInDict = new Dictionary<string, string>();
+    private List<string> _checkin = new List<string>();
 
 
     public CheckIn( string fName, string lName, string address, string email, long phone)
@@ -29,19 +30,43 @@ public class CheckIn
         
     }
 
-    public virtual bool AddToDictionary(string param1, string param2)
+    public virtual bool AddToDictionary(string param1,string param2)
     {
          if (!_checkInDict.ContainsKey(param1))
-    {
-        this._checkInDict.Add(param1, param2);
-        return true;
+          {
+               this._checkInDict.Add(param1, param2);
+               return true;
+          }
+          else
+          {
+               Console.WriteLine("The key already exists in the dictionary.");
+               return false;
+          }
     }
-    else
-    {
-        Console.WriteLine("The key already exists in the dictionary.");
-        return false;
-    }
-    }
+
+    // public void AddToCheckIn(CheckIn checkIn)
+    // {
+    //     _checkin.Add(checkIn);
+    // }
+
+      public virtual void AddCheckIn(string check)
+     {
+          this._checkin.Add(check);
+     }
+
+    // public virtual bool AddToDictionary(string param1, string param2)
+    // {
+    //      if (!_checkInDict.ContainsKey(param1))
+    // {
+    //     this._checkInDict.Add(param1, param2);
+    //     return true;
+    // }
+    // else
+    // {
+    //     Console.WriteLine("The key already exists in the dictionary.");
+    //     return false;
+    // }
+    // }
    
 
     public virtual string Name()
@@ -136,6 +161,7 @@ public class CheckIn
     {
         Console.WriteLine("Client check in \n".ToUpper());
         this.AddToDictionary("Session ID: ", this._clientId.ToString());
+        this.AddCheckIn($"Session ID: {this._clientId.ToString()}");
         Console.WriteLine("What is Your First Name?");
         Console.Write(">> ");
         this.SetAndGetFirstName = Console.ReadLine();
@@ -144,11 +170,13 @@ public class CheckIn
         Console.Write(">> ");
         this.SetAndGetLastName = Console.ReadLine();
         this.AddToDictionary("Name", $"{this.SetAndGetFirstName} {this.SetAndGetLastName}");
+        this.AddCheckIn($"Name: {this.SetAndGetFirstName} {this.SetAndGetLastName}");
 
         Console.WriteLine("\nWhat is Your Address?");
         Console.Write(">> ");
         this.SetAndGetAddress = Console.ReadLine();
         this.AddToDictionary("Address: ", $"{this.SetAndGetAddress}");
+        this.AddCheckIn($"Address: {this.SetAndGetAddress}");
        
         
 
@@ -159,6 +187,7 @@ public class CheckIn
         {
             this.SetAndGetPhone = phone; 
             this.AddToDictionary("Phone Number: ", $"{phone}");
+            this.AddCheckIn($"Phone Number: {phone}");
         } else {
             Console.WriteLine("Invalid Phone Number: ");
         }
@@ -171,6 +200,7 @@ public class CheckIn
         {
             this._email = emailAddress;
             this.AddToDictionary("Email: ", $"{this._email}");
+            this.AddCheckIn($"Email: {this._email}");
         } else {
             Console.WriteLine("Enter a valid Email Address");
         }
@@ -180,6 +210,7 @@ public class CheckIn
         string purpose = Console.ReadLine();
         string aim = this.PurposeOfVisit(purpose);
         this.AddToDictionary("Purpose of visit: ", $"{aim}");
+        this.AddCheckIn($"Purpose of visit: {aim}");
 
         Console.WriteLine("\nWhere refered by somebody?");
         Console.WriteLine(">> ");
@@ -190,11 +221,13 @@ public class CheckIn
             
             starm = this.Reference(true);
             this.AddToDictionary("Purpose of visit: ", $"{starm}");
+            this.AddCheckIn($"Purpose of visit: {starm}");
         }
         else if(goal == "no")
         {
             starm = this.Reference(false);
             this.AddToDictionary("Purpose of visit: ", $"{starm}");
+            this.AddCheckIn($"Purpose of visit: {starm}");
         }
         
     }
@@ -213,6 +246,24 @@ public class CheckIn
         return stringBuilder.ToString();
 
     }
+
+    public virtual List<string> DisplayChickIn()
+    {
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach (var checkin in this._checkin)
+        {
+            
+            string[] keyValue = checkin.Split(": ");
+            string keys = keyValue[0];
+            string values = keyValue[1];
+            Console.WriteLine($"{keys} {values}");
+
+            
+        }
+        return this._checkin;
+    }
+
+
     //     foreach(KeyValuePair<string, string> item in this._checkInDict)
     // {
     //     CheckIn checkIn = new CheckIn(string.Empty,string.Empty,string.Empty,string.Empty,0); 
@@ -222,18 +273,18 @@ public class CheckIn
     // return checkIns;
 
     // }
-    public List<CheckIn> SomeFunction() 
-    {
+//     public List<CheckIn> SomeFunction() 
+//     {
 
        
         
-     List<CheckIn> checkinList = new List<CheckIn>();
-     // Add a bunch of CheckIn objects to the list.
-     CheckIn checkin = new CheckIn();
+//      List<CheckIn> checkinList = new List<CheckIn>();
+//      // Add a bunch of CheckIn objects to the list.
+//      CheckIn checkin = new CheckIn();
 
-     checkinList.Add(checkin);
+//      checkinList.Add(checkin);
  
-    return checkinList;
-}
+//     // return checkinList;
+// }
 
 }

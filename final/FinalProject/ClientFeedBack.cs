@@ -1,9 +1,13 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+
 public class ClientFeedback: CheckIn
 {
     private bool _possibleReferal;
+    private List<string> _checkin = new List<string>();
+
+     
     private Dictionary<string, string> _feedback = new Dictionary<string, string>();
     private List<string> _experience = new List<string>{
         "Excellent",
@@ -12,6 +16,11 @@ public class ClientFeedback: CheckIn
         "Disappointing",
         "Awful"
     };
+
+    public override void AddCheckIn(string check)
+     {
+          this._checkin.Add(check);
+     }
 
 // The customer Comments on how the customer care or attendant treated him/her
     public string ExperienceWithAttendant()
@@ -105,6 +114,7 @@ public class ClientFeedback: CheckIn
         Console.Write(">> ");
         // this.ExperienceWithAttendant();
         this.AddToDictionary("Experience With Attendant: ", this.ExperienceWithAttendant());
+        this.AddCheckIn($"Experience With Attendant: {this.ExperienceWithAttendant()}");
 
         // overall experience of the customer in one word
         Console.WriteLine();
@@ -112,6 +122,7 @@ public class ClientFeedback: CheckIn
         Console.WriteLine("Describe your experience in one word by typing the corresponding number to your overall experience (1-5)");
         Console.Write(">> ");
         this.AddToDictionary("Overrall Experience: ", this.OverallExperience());
+        this.AddCheckIn($"Overrall Experience: {this.OverallExperience()}");
         
 
         
@@ -119,6 +130,7 @@ public class ClientFeedback: CheckIn
         Console.WriteLine("\nWhat do you think we (customer care and the company) can do to improve the quality of our services? ");
         Console.Write(">> ");
         this.AddToDictionary("Comment and Suggestions: ", this.CommentAndSuggestion());
+        this.AddCheckIn($"Comment and Suggestions: {this.CommentAndSuggestion()}");
 
         // Ask if the customer will recommend or refer our company his/her friends and family
         bool response = false;
@@ -138,6 +150,7 @@ public class ClientFeedback: CheckIn
 
         }
         this.AddToDictionary("Recommendation posibility: ",  response.ToString());
+        this.AddCheckIn($"Recommendation posibility: {response.ToString()}");
 
         // 
         Console.WriteLine($"\nYour Feedback Has Been Recorded. ");
@@ -155,6 +168,19 @@ public class ClientFeedback: CheckIn
         }
         return stringBuilder.ToString();
     }
+    public override List<string> DisplayChickIn()
+    {
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach (var checkin in this._checkin)
+        {
+            string[] keyValue = checkin.Split(": ");
+            string keys = keyValue[0];
+            string values = keyValue[1];
+            Console.WriteLine($"{keys} {values}");
 
+            
+        }
+        return this._checkin;
+    }
 
 }

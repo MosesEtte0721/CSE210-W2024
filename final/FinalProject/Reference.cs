@@ -11,6 +11,7 @@ public class Reference: CheckIn
     private string _refLastName;
 
     private Dictionary<string, string> _refererInfo = new Dictionary<string, string>();
+    private List<string> _checkin = new List<string>();
 
     public Reference(string fname, string lName, string email,  long phone, string address = "N/A" )
     {
@@ -24,6 +25,11 @@ public class Reference: CheckIn
     public Reference():this(string.Empty,string.Empty,string.Empty,0,string.Empty)
     {
 
+    }
+
+    public override void AddCheckIn(string check)
+    {
+        this._checkin.Add(check);
     }
 
     public override bool AddToDictionary(string param1, string param2)
@@ -77,6 +83,7 @@ public class Reference: CheckIn
           Console.Write(">> ");
           this._refLastName = Console.ReadLine();
           this.AddToDictionary("Referer's Name: ", $"{this._refFirstName} {this._refLastName}");
+          this.AddCheckIn($"Referer's Name: {this._refFirstName} {this._refLastName}");
           Console.WriteLine("\n");
           
 
@@ -86,6 +93,7 @@ public class Reference: CheckIn
           Console.Write(">> ");
           this._refAddress = Console.ReadLine();
           this.AddToDictionary("Address Of Referer (optional): ", this.Address());
+          this.AddCheckIn($"Address Of Referer (optional): {this.Address()}");
           Console.WriteLine("\n");
 
           // Ask for customer care rep's Email Address and then add it to a collection
@@ -93,6 +101,7 @@ public class Reference: CheckIn
           Console.Write(">> ");
           this._refEmail = Console.ReadLine();
           this.AddToDictionary("Email Of Referer: ", this.Email());
+          this.AddCheckIn($"Email Of Referer: {this.Email()}");
           Console.WriteLine("\n");
 
           // Ask for customer care rep' Phone number and then add it to a collection
@@ -100,6 +109,7 @@ public class Reference: CheckIn
           Console.Write(">> ");
           long.TryParse(Console.ReadLine(), out this._refPhone);
           this.AddToDictionary("Phone Number Of Referer: ", this._refPhone.ToString());
+          this.AddCheckIn($"Phone Number Of Referer: {this._refPhone.ToString()}");
           Console.WriteLine("\n");
 
           Console.WriteLine("\nYour Referer's Details have Been Recorded. ");
@@ -116,6 +126,23 @@ public class Reference: CheckIn
         }
         return stringBuilder.ToString();
         
+    }
+
+   public override List<string> DisplayChickIn()
+    {
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach (var checkin in this._checkin)
+        {
+            
+            string[] keyValue = checkin.Split(": ");
+            string keys = keyValue[0];
+            string values = keyValue[1];
+            Console.WriteLine($"{keys} {values}");
+            // Console.WriteLine($"{checkin.DisplayCurrentClassInfo()}");
+
+            
+        }
+        return this._checkin;
     }
 
 }

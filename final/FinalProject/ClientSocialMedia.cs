@@ -9,6 +9,7 @@ public class ClientSocialMedia: CheckIn
     private string _instagram;
     private string _linkedIn;
     private Dictionary<string, string> _socialMedia = new Dictionary<string, string>();
+    private List<string> _checkin = new List<string>();
     private List<string> _listOfSocialMedia = new List<string>{
         "LinkedIn",
         "Facebook",
@@ -16,6 +17,7 @@ public class ClientSocialMedia: CheckIn
         "X(twitter)",
         "quite".ToUpper()
     };
+
 
     public ClientSocialMedia(string facebook)
     {
@@ -49,8 +51,13 @@ public class ClientSocialMedia: CheckIn
 
   
 
-  
+    public override void AddCheckIn(string check)
+     {
+          this._checkin.Add(check);
+     }
 
+
+    
     public string ClientSocialNetworks()
     {
         return $"{this._facebook} \n{this._twitter} \n{this._instagram} \n{this._linkedIn}";
@@ -122,6 +129,7 @@ public class ClientSocialMedia: CheckIn
                             else if(!this._socialMedia.TryGetValue(this._linkedIn, out linkedinUsername))
                             {
                                 this.AddToDictionary("LinkedIn Username: ", this._linkedIn);
+                                this.AddCheckIn($"LinkedIn Username: { this._linkedIn}");
                             }
                             
                         
@@ -144,6 +152,7 @@ public class ClientSocialMedia: CheckIn
                             else if(!this._socialMedia.TryGetValue(this._facebook, out facebookUsername))
                             {
                                 this.AddToDictionary("Facebook Username: ", this._facebook);
+                                this.AddCheckIn($"Facebook Username: {this._facebook}");
                             }
                     }
                     if(yes == 3)
@@ -163,6 +172,7 @@ public class ClientSocialMedia: CheckIn
                             else if(!this._socialMedia.TryGetValue(this._instagram, out instagramUsername))
                             {
                                 this.AddToDictionary("Instagram Username: ", this._linkedIn);
+                                this.AddCheckIn($"Instagram Username: {this._linkedIn}");
                             }
                     }
                     else if(yes == 4)
@@ -181,6 +191,7 @@ public class ClientSocialMedia: CheckIn
                             else if(!this._socialMedia.TryGetValue(this._twitter, out twitterUsername))
                             {
                                 this.AddToDictionary("X(twitter) Username: ", this._twitter);
+                                this.AddCheckIn($"X(twitter) Username: {this._twitter}");
                             }
                     }
                     else if(yes == 5)
@@ -230,5 +241,19 @@ public class ClientSocialMedia: CheckIn
         return stringBuilder.ToString();
     }
 
+    public override List<string> DisplayChickIn()
+    {
+        Console.WriteLine("Referer Information \n".ToUpper());
+        foreach(string checkin in this._checkin)
+        {
+            string[] keyValue = checkin.Split(": ");
+            string keys = keyValue[0];
+            string values = keyValue[1];
+            Console.WriteLine($"{keys} {values}");
+
+            
+        }
+        return this._checkin;
+    }
 
 }

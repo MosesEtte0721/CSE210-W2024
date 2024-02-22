@@ -3,6 +3,8 @@ using System;
 public class SimpleGoal: Goal
 {
     private bool _isComplete;
+    List<Goal> _goals = new List<Goal>();
+
 
     public SimpleGoal(string name, string description, string points): base(name, description, points)
     {
@@ -17,7 +19,7 @@ public class SimpleGoal: Goal
 
     public override string GetStringRepresentation()
     {
-        return $"{this._shortName}, {this._description}, {this._points},{this._isComplete}";
+        return $"Name: {this._shortName}, Desc: {this._description}, Points: {this._points}, Target: {this._isComplete} ";
     }
 
     
@@ -26,4 +28,9 @@ public class SimpleGoal: Goal
     {
         return this._isComplete;
     }
+
+    // public override void AddGoals(Goal _goals)
+    // {
+
+    // }
 }

@@ -1,19 +1,23 @@
 using System;
 public class Menu
-{
+{   
+    // private string _shortName;
+    // private string _desc;
+    // private string _point;
+    // private string _
     private List<string> _menuList = new List<string>{
         "Create New Goal",
         "List Goals",
         "Save Goals",
         "Load",
         "Record an Event",
-        "Quite"
+        "Quit"
     };
 
     private List<string> _goalList = new List<string>{
-        "Check List",
+        "Simple Goal",
         "Eternal Goal",
-        "Simple Goal"
+        "Check List"
     };
 
    
@@ -42,6 +46,11 @@ public class Menu
         }
         
     }
+
+    // public string Prompts()
+    // {
+    //     string name = ;
+    // }
 
  
 }
