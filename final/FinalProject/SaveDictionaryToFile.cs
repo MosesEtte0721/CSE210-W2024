@@ -7,16 +7,16 @@ public class SaveDictionaryToFile
 {
     
    
-    public  void SaveDictionary(List<string> checkin)
+    public  void SaveDictionary(List<string> checkin, string fileName)
     {
-        Console.WriteLine("Create Name for the file: ");
-        Console.WriteLine(">> ");
-        string fileName = Console.ReadLine();
+        
         using (StreamWriter fileSystem = new StreamWriter(fileName))
         {
-            foreach (var check  in checkin)
+            foreach(var check  in checkin)
             {
-                 fileSystem.WriteLine($"{check}");
+                 fileSystem.WriteLine($"{check}\n");
+                Console.WriteLine(check);
+                
             }
    
         }

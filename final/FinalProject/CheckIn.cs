@@ -210,7 +210,7 @@ public class CheckIn
         string purpose = Console.ReadLine();
         string aim = this.PurposeOfVisit(purpose);
         this.AddToDictionary("Purpose of visit: ", $"{aim}");
-        this.AddCheckIn($"Purpose of visit: {aim}");
+        this.AddCheckIn($"Purpose of visit met: {aim}");
 
         Console.WriteLine("\nWhere refered by somebody?");
         Console.WriteLine(">> ");
@@ -249,17 +249,23 @@ public class CheckIn
 
     public virtual List<string> DisplayChickIn()
     {
-        Console.WriteLine("Referer Information \n".ToUpper());
+        Console.WriteLine("Check in session \n".ToUpper());
+        List<string> temporalList = new List<string>();
         foreach (var checkin in this._checkin)
         {
             
             string[] keyValue = checkin.Split(": ");
             string keys = keyValue[0];
-            string values = keyValue[1];
-            Console.WriteLine($"{keys} {values}");
+            string values = keyValue.Length > 1 ? keyValue[1] : "No Value Found";
+            // Console.WriteLine($"{keys} {values}");
+             temporalList.Add($"{keys}: {values} \n I love codding my thing");
 
             
         }
+
+        this._checkin.AddRange(temporalList);
+
+
         return this._checkin;
     }
 

@@ -23,10 +23,10 @@ public class ClientFeedback: CheckIn
      }
 
 // The customer Comments on how the customer care or attendant treated him/her
-    public string ExperienceWithAttendant()
+    public string ExperienceWithAttendant(string param)
     {
-                string expWithAttendant = Console.ReadLine();
-                return $"{expWithAttendant} ";
+                
+                return $"{param} ";
     }
 
 // Display list of one word to express the quality of service the customer received
@@ -41,12 +41,12 @@ public class ClientFeedback: CheckIn
         }
     }
 
-    public string OverallExperience()
+    public string OverallExperience(int number)
     {
 
-        int number;
+        
         string ans = "";
-        int.TryParse(Console.ReadLine(), out number);
+        
        
          switch (number)
                 {
@@ -78,10 +78,10 @@ public class ClientFeedback: CheckIn
     }
 
 // The customer suggests or recommends what can be done to improve the quality of services offered
-    public string CommentAndSuggestion()
+    public string CommentAndSuggestion(string param)
     {
-        string suggestionAndComment = Console.ReadLine();
-        return $"{suggestionAndComment} ";
+        
+        return $"{param} ";
     }
 
     public bool SetAndGetReferal
@@ -112,30 +112,34 @@ public class ClientFeedback: CheckIn
        
         Console.WriteLine("In details, How was your experience with the attendant? ");
         Console.Write(">> ");
+        string expWithAttendant = Console.ReadLine();
         // this.ExperienceWithAttendant();
-        this.AddToDictionary("Experience With Attendant: ", this.ExperienceWithAttendant());
-        this.AddCheckIn($"Experience With Attendant: {this.ExperienceWithAttendant()}");
+        this.AddToDictionary("Experience With Attendant: ", this.ExperienceWithAttendant(expWithAttendant));
+        this.AddCheckIn($"Experience With Attendant: {this.ExperienceWithAttendant(expWithAttendant)}");
 
         // overall experience of the customer in one word
         Console.WriteLine();
         this.DisplayListExperience();
         Console.WriteLine("Describe your experience in one word by typing the corresponding number to your overall experience (1-5)");
         Console.Write(">> ");
-        this.AddToDictionary("Overrall Experience: ", this.OverallExperience());
-        this.AddCheckIn($"Overrall Experience: {this.OverallExperience()}");
+        int para;
+        int.TryParse(Console.ReadLine(), out para);
+        this.AddToDictionary("Overrall Experience: ", this.OverallExperience(para));
+        this.AddCheckIn($"Overrall Experience: {this.OverallExperience(para)}");
         
 
         
         // suggestions on how to improve the quality of service
         Console.WriteLine("\nWhat do you think we (customer care and the company) can do to improve the quality of our services? ");
         Console.Write(">> ");
-        this.AddToDictionary("Comment and Suggestions: ", this.CommentAndSuggestion());
-        this.AddCheckIn($"Comment and Suggestions: {this.CommentAndSuggestion()}");
+        string suggestionAndComment = Console.ReadLine();
+        this.AddToDictionary("Comment and Suggestions: ", this.CommentAndSuggestion(suggestionAndComment));
+        this.AddCheckIn($"Comment and Suggestions: {this.CommentAndSuggestion(suggestionAndComment)}");
 
         // Ask if the customer will recommend or refer our company his/her friends and family
         bool response = false;
         Console.WriteLine($"\nWould you Recommend or refer our company and products to your friends and family? ");
-        Console.Write(">> ");
+        // Console.Write(">> ");
         string yesOrNo = Console.ReadLine().ToLower();
 
         if(yesOrNo == "yes")
@@ -170,16 +174,19 @@ public class ClientFeedback: CheckIn
     }
     public override List<string> DisplayChickIn()
     {
-        Console.WriteLine("Referer Information \n".ToUpper());
+        Console.WriteLine("Client feedback \n".ToUpper());
+         List<string> temporalList = new List<string>();
         foreach (var checkin in this._checkin)
         {
             string[] keyValue = checkin.Split(": ");
             string keys = keyValue[0];
-            string values = keyValue[1];
-            Console.WriteLine($"{keys} {values}");
+             string values = keyValue.Length > 1 ? keyValue[1] : "No Value Found";
+            // Console.WriteLine($"\n{keys}: \n{values}");
+             temporalList.Add($"{keys}: {values} \n I love codding my thing");
 
             
         }
+        this._checkin.AddRange(temporalList);
         return this._checkin;
     }
 

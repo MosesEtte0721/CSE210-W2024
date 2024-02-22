@@ -1,0 +1,36 @@
+using System;
+
+// create a new list to store converted CheckIn object
+                    List<object> collection = new List<object>();
+                    List<string> ObjectToString = new List<string>();
+
+                    foreach (object variable in collection)
+                    {
+                    // Convert the CheckIn object to a string in the way that's appropriate for the parameter in SaveToDictionaryToFile()
+                    string listString = variable.ToString();
+                    //  Add the converted CheckIn Object
+                    ObjectToString.Add(listString);
+    
+                    }
+
+                    // create a new list to store converted CheckIn obje
+                    List<string> listStrings = new List<string>();
+                    foreach (CheckIn checkin in checkinList)
+                    {
+                    // Convert the CheckIn object to a string in the way that's appropriate for the parameter in SaveToDictionaryToFile()
+                    string listString = checkin.ToString();
+                    //  Add the converted CheckIn Object
+                    listStrings.Add(listString);
+    
+                    }
+
+                     SaveDictionaryToFile saveDictionary = new SaveDictionaryToFile();
+                    Console.WriteLine("Create Name for the file: ");
+                    Console.WriteLine(">> ");
+                    string fileName = Console.ReadLine();
+                    foreach(CheckIn check in checkinList)
+                    {
+                        saveDictionary.SaveDictionary(listStrings,fileName);
+                        
+                        
+                    }

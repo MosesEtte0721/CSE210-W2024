@@ -2,7 +2,7 @@ using System;
 public class MenuList
 {
 
-    private double _period;
+    // private double _period;
     private List<string> _menuList = new List<string>{
         "Check In a Customer",
         "View Customer's feedback on Their Experience",

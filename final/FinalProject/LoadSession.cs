@@ -19,7 +19,7 @@ public class RetrieveFile
 
         foreach(var word in ReadAllFiles)
         {
-            string[] splitWords = word.Split("-");
+            string[] splitWords = word.Split(": ");
             string indexZero = splitWords[0];
             string indexOne = splitWords[1];
             _randomScriptures.Add(indexZero, indexOne); 

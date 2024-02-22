@@ -242,18 +242,18 @@ public class ClientSocialMedia: CheckIn
     }
 
     public override List<string> DisplayChickIn()
+{
+    Console.WriteLine("Social media \n".ToUpper());
+    List<string> temporalList = new List<string>();
+    foreach (string checkin in this._checkin)
     {
-        Console.WriteLine("Referer Information \n".ToUpper());
-        foreach(string checkin in this._checkin)
-        {
-            string[] keyValue = checkin.Split(": ");
-            string keys = keyValue[0];
-            string values = keyValue[1];
-            Console.WriteLine($"{keys} {values}");
-
-            
-        }
-        return this._checkin;
+        string[] keyValue = checkin.Split(": ");
+        string keys = keyValue[0];
+        string values = keyValue.Length > 1 ? keyValue[1] : "No Value Found";
+        // Console.WriteLine($"{keys}: {values} \n");
+        temporalList.Add($"{keys}: {values} \n I love codding my thing");
     }
-
+    this._checkin.AddRange(temporalList);
+    return this._checkin;
+}
 }
